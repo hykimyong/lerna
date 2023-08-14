@@ -2,6 +2,8 @@ import express,{Application} from 'express';
 import sequelize from './sequelize';
 import routes from './routes';
 import session from 'express-session';
+import cors from 'cors';
+import socket from './socket';
 
 const FileStore = require('session-file-store')(session);
 
@@ -17,6 +19,11 @@ const sessionMiddleWare = session({
 
 app.use(sessionMiddleWare);
 app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods : ['GET','POST','PUT','DELETE'],
+    credentials: true
+}));
 app.use(express.urlencoded({extended:true}));
 
 sequelize.sync({force:true});
@@ -24,6 +31,8 @@ sequelize.sync({force:true});
 app.use('/',routes);
 
 
-app.listen(8000, ()=>{
+const server = app.listen(8000, ()=>{
     console.log('start');
-})
+});
+
+socket(server,app,sessionMiddleWare);

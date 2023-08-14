@@ -29,10 +29,13 @@ router.get('/:roomId', async(req,res)=>{
 router.post('/:roomId', async(req,res)=>{
     try{
         const chat = await Chat.create({
-            senderId:req.session.userId,
+            senderId : req.session.userId,
             content : req.body.content,
             roomId : req.params.roomId
         });
+
+        const io = req.app.get('io');
+        io.of('/chat').to(req.params.roomId).emit('chat',chat);
 
         /**
          * TODO:: socket
