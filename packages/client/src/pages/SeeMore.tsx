@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
- const SeeMore: React.FC = () => {
-  return (
-    <div>SeeMore</div>
-  )
-}
+const SeeMore: React.FC = () => {
+  return <div>SeeMore</div>;
+};
 
 export default SeeMore;
