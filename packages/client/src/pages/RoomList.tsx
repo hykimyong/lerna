@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 import BottomNavigation from "../components/BottomNavigation";
 import TopNavigation from "../components/TopNavigation";
+import ChatRoomList from "../components/ChatRoomList";
 
 const Base = styled.div`
   width: 100%;
@@ -21,6 +22,7 @@ const RoomListPage: React.FC = () => {
     <Base>
       <Container>
         <TopNavigation title="채팅" />
+        <ChatRoomList/>
         <BottomNavigation />
       </Container>
     </Base>
